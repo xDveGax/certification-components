@@ -1,0 +1,15 @@
+@import '~@openexo/design-system/theming';
+// @import '~@angular/material/theming';
+// @include mat-core(); 
+
+// // Use the desired palette
+// $primary: mat-palette($mat-purple);
+// $secondary: mat-palette($mat-indigo);
+// // Create the theme
+$theme: mat-light-theme($primary, $secondary, $warn);
+
+// Include component specific mixin
+@include mat-select-theme($theme);
+@include mat-stepper-theme($theme);
+@include mat-checkbox-theme($theme);
+

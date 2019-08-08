@@ -1,0 +1,113 @@
+@import "variables";
+
+/*button {
+  background-color: $primary-color;
+  box-shadow: none;
+  color: white;
+  border: 0px; 
+  font-size: 14px;
+  font-weight: 700; 
+  border-radius: 300px;
+  height: 48px;
+  padding: 0px 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 16px;
+  &:focus {
+    outline: none;
+  }
+}*/
+
+
+a {
+  cursor: pointer;
+  color: $link-color;
+  text-decoration: underline;
+}
+
+input, mat-select {
+  background-color: $field-background-color;
+  border: 1px solid #ccc;
+  color: $text-color;
+  box-sizing: border-box;
+  border-radius: 4px;
+  height: 38px;
+  padding: 0px 12px;
+  margin-top: 6px;
+  font-size: 12px;
+  &:focus {
+    outline: none;
+  }
+  &.mat-select{
+    border-radius: 3px;
+    padding: 8px;
+  }
+}
+
+label {
+  font-family: $font-family;
+  font-size: 16px;
+  font-weight: 400;
+  height: 20px;
+  line-height: 20px;
+  margin-bottom: 4px;
+  padding-top: 0px;
+  text-align: left;
+  color: $text-color;
+}
+
+.container-form {
+  font-family: $font-family;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  place-content: stretch flex-start;
+  align-items: stretch;
+  max-width: 100%;
+}
+
+::ng-deep.mat-step-header{
+  .mat-step-icon {
+    background-color: $stepper-icon;
+    color: white;
+    &.mat-step-icon-selected {
+      background-color: $primary-color;
+    }
+  }
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.mat-form-field {
+  ::ng-deep.mat-form-field-infix {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  ::ng-deep.mat-form-field-underline {
+    height: 0px;
+    .mat-form-field-ripple{
+      background-color: transparent;
+    }
+  }
+}
+
+.mat-error{
+  color:red;
+  font-size: 75%;
+}
+
+.flex-column-start{
+  display: flex;
+  flex-direction: column;
+  place-content: flex-start;
+  align-items: flex-start;
+}
+
+// adds breaks to the mat-checkboxes with long labels
+::ng-deep .mat-checkbox-layout {
+  white-space: normal !important;
+}
+::ng-deep .mat-checkbox-inner-container {
+  margin-top: 5px !important;
+}

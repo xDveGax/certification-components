@@ -1,0 +1,152 @@
+<mat-horizontal-stepper #stepper [linear]="true">
+  <mat-step [stepControl]="firstFormGroup" editable="false" #step1 >
+    <ng-template matStepLabel>User Details</ng-template>
+    <form [formGroup]="firstFormGroup" class="container-form" novalidate autocomplete="off">
+      <mat-form-field *ngIf="isNewUser">
+        <label>First Name <span class="required">*</span></label>
+        <input
+          matInput
+          formControlName="firstName">
+        <mat-error >{{firstFormGroup.get('firstName').errors | humanizeFormErrors}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <label>Email <span class="required">*</span></label>
+        <input
+          matInput
+          formControlName="email">
+        <mat-error>{{firstFormGroup.get('email').errors | humanizeFormErrors}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <label>Password <span class="required">*</span></label>
+        <input
+          matInput
+          type="password"
+          formControlName="password">
+        <mat-error>{{firstFormGroup.get('password').errors | humanizeFormErrors}}</mat-error>
+      </mat-form-field>
+    </form>
+    <div class="flex-column-start">
+      <button (click)="onNextStep($event)" type="submit" mat-flat-button color="primary" >
+        {{isNewUser ? 'Sign up' : 'Log in'}}
+      </button>
+      <div class="push-top">
+        <a (click)="showLoginForm()" *ngIf="isNewUser; else createAccountTpl">Already have an account? Sign in</a>
+        <ng-template #createAccountTpl>
+          <a (click)="showRegisterForm()" #createAccountTpl>Don't have an account? Sign up</a>
+        </ng-template>
+      </div>
+      <exo-alert *ngIf="showAlertGoToLevel2" class="push-top"
+        message="You need to complete the ExO Consultant course to be able to access this one"
+        typeAlert="info"
+        [isCloseable]="false"
+        actionButtonText="Go to course"
+        (sendAction) = "goToLevel2()"
+      ></exo-alert>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" editable="false">
+    <ng-template matStepLabel>Invoice Details</ng-template>
+    <h3 *ngIf="!isNewUser;else fieldsTpl">
+      Hi {{firstFormGroup.get('firstName').value}}
+    </h3>
+    <ng-template #fieldsTpl>
+      <form [formGroup]="firstFormGroup" class="container-form" novalidate autocomplete="off">
+        <mat-form-field>
+          <label>First Name <span class="required">*</span></label>
+          <input
+            matInput
+            formControlName="firstName"
+            [value]="firstFormGroup.get('firstName').value">
+          <mat-error >{{firstFormGroup.get('firstName').errors | humanizeFormErrors}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <label>Email <span class="required">*</span></label>
+          <input
+            matInput
+            formControlName="email"
+            [value]="firstFormGroup.get('email').value">
+          <mat-error>{{firstFormGroup.get('email').errors | humanizeFormErrors}}</mat-error>
+        </mat-form-field>
+      </form>
+    </ng-template>
+    <form [formGroup]="secondFormGroup" class="container-form" novalidate autocomplete="off">
+      <mat-form-field>
+        <label>Cohort <span class="required">*</span></label>
+        <mat-select formControlName="cohort">
+          <mat-option *ngFor="let cohort of cohorts$ | async" [value]="cohort">
+            {{displayForCohorts(cohort)}}
+          </mat-option>
+        </mat-select>
+        <mat-error>{{secondFormGroup.get('cohort').errors | humanizeFormErrors}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <label>Coupon</label>
+        <input
+          matInput
+          formControlName="coupon">
+        <mat-error>{{secondFormGroup.get('coupon').errors | humanizeFormErrors}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <label>TaxID <span class="required">*</span></label>
+        <input
+          matInput
+          formControlName="taxId">
+        <mat-error>{{secondFormGroup.get('taxId').errors | humanizeFormErrors}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <label>Billing Address <span class="required">*</span></label>
+        <input
+          matInput
+          formControlName="billingAddress">
+        <mat-error>{{secondFormGroup.get('billingAddress').errors | humanizeFormErrors}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <label>Billing Name <span class="required">*</span></label>
+        <input
+          matInput
+          formControlName="billingName">
+        <mat-error>{{secondFormGroup.get('billingName').errors | humanizeFormErrors}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <label>Company <span class="required">*</span></label>
+        <input
+          matInput
+          formControlName="companyName">
+        <mat-error>{{secondFormGroup.get('companyName').errors | humanizeFormErrors}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <label>Country <span class="required">*</span></label>
+        <input
+          matInput
+          [matAutocomplete]="countryAutocomplete"
+          formControlName="country">
+        <mat-error>{{secondFormGroup.get('country').errors | humanizeFormErrors}}</mat-error>
+      </mat-form-field>
+      <mat-autocomplete #countryAutocomplete [displayWith]="displayForCountries">
+        <mat-option *ngFor="let country of filteredCountries$ | async" [value]="country">
+          {{country.name}}
+        </mat-option>
+      </mat-autocomplete>
+      <div class="policy-field push-bottom">
+        <mat-checkbox formControlName="policy" color="primary" class="push-bottom">I have read the <a href="https://platform.openexo.com/static/agreement/Privacy%20Policy%20Contact%20Information%20FORM.pdf" target="_blank">Privacy Policy</a> and I want to receive newsletters and communications about the services, news and events of OpenExO through any medium.</mat-checkbox>
+        <mat-error>{{secondFormGroup.get('policy').errors | humanizeFormErrors}}</mat-error>
+      </div>
+      <div class="recaptcha">
+        <ngx-invisible-recaptcha #captchaElem
+          [siteKey]="siteKey"
+          [useGlobalDomain]="false"
+          theme="Light"
+          type="Image"
+          badge="Bottomright"
+          formControlName="recaptcha"
+          (error)="handleCaptchaError()"
+        >
+        </ngx-invisible-recaptcha>
+      </div>
+      <div>
+        <button mat-flat-button color="primary" (click)="onPay()">Proceed with payment</button>
+      </div>
+    </form>
+  </mat-step>
+</mat-horizontal-stepper>
