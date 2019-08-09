@@ -13,17 +13,14 @@ import {
   MatIconModule,
   MatAutocompleteModule,
   MatCheckboxModule,
-  RippleGlobalOptions,
-  MAT_RIPPLE_GLOBAL_OPTIONS
 } from '@angular/material';
 
 import { NgxCaptchaModule } from 'ngx-captcha';
 
-import { ExoAlertModule, ExoButtonModule } from '@openexo/design-system';
-
 import { CertificationFormComponent } from './certification-form/certification-form.component';
 import { HumanizeFormErrorsPipe } from './pipes/humanize-form-errors.pipe';
 import { ApiService } from './api.service';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   imports: [
@@ -40,13 +37,12 @@ import { ApiService } from './api.service';
     MatSelectModule,
     MatIconModule,
     MatAutocompleteModule,
-    MatCheckboxModule,
-    ExoAlertModule,
-    ExoButtonModule
+    MatCheckboxModule
   ],
   declarations: [
     CertificationFormComponent,
-    HumanizeFormErrorsPipe
+    HumanizeFormErrorsPipe,
+    AlertComponent
   ],
   providers: [
     ApiService

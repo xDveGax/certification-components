@@ -1,6 +1,6 @@
 @import "variables";
 
-/*button {
+button {
   background-color: $primary-color;
   box-shadow: none;
   color: white;
@@ -16,7 +16,7 @@
   &:focus {
     outline: none;
   }
-}*/
+}
 
 
 a {
@@ -110,4 +110,17 @@ label {
 }
 ::ng-deep .mat-checkbox-inner-container {
   margin-top: 5px !important;
+}
+
+.push-bottom {
+  margin-bottom: 18px;
+}
+
+.push-top {
+  margin-bottom: 18px;
+}
+
+::ng-deep.mat-checkbox:not(.mat-checkbox-disabled).mat-primary .mat-checkbox-ripple .mat-ripple-element,
+::ng-deep.mat-checkbox-checked.mat-primary .mat-checkbox-background{
+  background-color: $primary-color;
 }

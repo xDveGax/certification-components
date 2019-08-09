@@ -55,7 +55,7 @@ export class CertificationFormComponent implements OnInit {
       billingName: [null, [Validators.required]],
       taxId: [null, [Validators.required]],
       billingAddress: [null, [Validators.required]],
-      companyName: [null, [Validators.required]],
+      companyName: [null],
       coupon: [this.coupon],
       country: [null, [Validators.required]],
       recaptcha: [null],

@@ -25,7 +25,6 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "@webcomponents/custom-elements": "^1.2.0",
-    "@openexo/design-system": "0.4.9-alpha",
     "core-js": "^2.5.4",
     "ngx-captcha": "^7.0.0",
     "rxjs": "~6.3.3",

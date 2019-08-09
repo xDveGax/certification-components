@@ -35,13 +35,11 @@
           <a (click)="showRegisterForm()" #createAccountTpl>Don't have an account? Sign up</a>
         </ng-template>
       </div>
-      <exo-alert *ngIf="showAlertGoToLevel2" class="push-top"
+      <app-alert *ngIf="showAlertGoToLevel2" class="push-top"
         message="You need to complete the ExO Consultant course to be able to access this one"
-        typeAlert="info"
-        [isCloseable]="false"
         actionButtonText="Go to course"
         (sendAction) = "goToLevel2()"
-      ></exo-alert>
+      ></app-alert>
     </div>
   </mat-step>
   <mat-step [stepControl]="secondFormGroup" editable="false">
@@ -109,7 +107,7 @@
         <mat-error>{{secondFormGroup.get('billingName').errors | humanizeFormErrors}}</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <label>Company <span class="required">*</span></label>
+        <label>Company</label>
         <input
           matInput
           formControlName="companyName">

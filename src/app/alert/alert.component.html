@@ -1,0 +1,7 @@
+<div class="alert__container">
+  <div class="body-2 alert__description">
+    <mat-icon class="icon_type">info</mat-icon>
+    <div>{{message}}</div>
+  </div>
+  <button class="alert__action-button push-left-xs" *ngIf="actionButtonText" mat-button color="primary" (click)="onAction()">{{actionButtonText}}</button>
+</div>
